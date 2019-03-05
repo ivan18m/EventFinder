@@ -1,4 +1,4 @@
-# **PlaceFinder**
+# **EventFinder**
 HATEOAS REST API to find places with events within a radius from sent coordinates
 
 # SETUP
@@ -7,13 +7,13 @@ HATEOAS REST API to find places with events within a radius from sent coordinate
 * Setup database connection in .env file,
 * Run the containers
 ```
-cd PlaceFinder
+cd EventFinder
 docker-compose up
 ```
 
 ## **Migrations**
 ```
-cd PlaceFinder/www
+cd EventFinder/www
 php artisan migrate
 ```
 
