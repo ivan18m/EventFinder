@@ -1,7 +1,7 @@
 # **EventFinder**
 HATEOAS REST API to find places with events within a radius from sent coordinates
 
-# SETUP
+# Setup
 
 ## **Docker (on Linux)**
 * Setup database connection in .env file,
