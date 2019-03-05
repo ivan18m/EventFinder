@@ -1,5 +1,7 @@
 # **EventFinder**
-HATEOAS REST API to find places with events within a radius from sent coordinates
+HATEOAS REST API made in Laravel. 
+
+Find places with events within a radius from sent coordinates
 
 # Setup
 
