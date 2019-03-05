@@ -108,5 +108,5 @@ php artisan db:seed
 
 * **Success Response Example:**
 
-    `{ "status" : "success", "id" : 1 }`
+    `{ "status" : "success"}`
 ----
