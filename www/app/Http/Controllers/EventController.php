@@ -30,20 +30,11 @@ class EventController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|min:2|max:30',
-            'place' => 'required|integer',
+            'place' => 'required|integer|exists:place,id',
             'description' => 'nullable|string',
             'starts_at' => 'required|string',
             'duration' => 'nullable|string'
         ]);
-
-        $exists = Place::find($request->place);
-
-        if($exists == NULL) {
-            return \Response::json([
-                'status' => 'error', 
-                'message' => "Place doesn't exist"
-            ], 400);
-        }
 
         $event = new Event;
         $event->name = $request->name;

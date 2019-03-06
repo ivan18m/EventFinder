@@ -25,7 +25,7 @@ class Event extends Model
      */
     public function place()
     {
-        return $this->belongsTo('App\Place');
+        return $this->belongsTo(\App\Place::class);
     }
 
     /**
@@ -33,6 +33,6 @@ class Event extends Model
      */
     public function comments()
     {
-        return $this->hasMany('App\Comment');
+        return $this->hasMany(\App\Comment::class);
     }
 }

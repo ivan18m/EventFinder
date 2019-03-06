@@ -29,7 +29,7 @@ class CommentController extends Controller
         $data = $request->validate([
             'author' => 'required|string|min:2|max:30',
             'text' => 'required|string|max:255',
-            'event' => 'required|integer',
+            'event' => 'required|integer|exists:event,id',
         ]);
 
         $exists = Event::find($request->event);
