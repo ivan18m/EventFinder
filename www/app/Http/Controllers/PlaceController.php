@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Place;
+use App\Queries\WithinRadius;
 
 class PlaceController extends Controller
 {
@@ -123,6 +124,7 @@ class PlaceController extends Controller
         ]);
 
         $unit = 'km';
+        $units = ["km" => 6371, "mi" => 3959];
 
         if(\property_exists($request, 'unit')) {
             if(\in_array($unit, $units)) {
@@ -130,46 +132,7 @@ class PlaceController extends Controller
             }
         }
 
-        $units = ["km" => 6371, "mi" => 3959];
-
-        $haversine = "
-            :unit_value::numeric * 
-            ATAN2(
-                SQRT(
-                    POW(
-                        COS(RADIANS(:lat)) * 
-                        SIN(RADIANS(:lng - p.longitude))
-                    , 2) +
-                    POW(
-                        COS(RADIANS(p.latitude)) * 
-                        SIN(RADIANS(:lat)) -
-                        (
-                            SIN(RADIANS(p.latitude)) * 
-                            COS(RADIANS(:lat)) *
-                            COS(RADIANS(:lng - p.longitude))
-                        )
-                    , 2)
-                ),
-                SIN(RADIANS(p.latitude)) * SIN(RADIANS(:lat)) +
-                COS(RADIANS(p.latitude)) * COS(RADIANS(:lat)) * COS(RADIANS(:lng - p.longitude))
-            )::numeric";
-
-        $sql = "SELECT id, name, latitude, longitude, 
-                :unit::varchar AS unit, 
-                round($haversine, 2) AS distance
-                FROM place p
-                GROUP BY id
-                HAVING round($haversine, 2) <= :radius
-                ORDER BY distance";
-
-        $params = [
-            'lat' => $request->latitude, 
-            'lng' => $request->longitude, 
-            'radius' => $request->radius,
-            'unit_value' => $units[$unit],
-            'unit' => $unit
-        ];
-
-        return DB::select($sql, $params);
+        $wr = new WithinRadius;
+        return $wr->getPlaces($request->latitude, $request->longitude, $request->radius, $unit);
     }
 }
