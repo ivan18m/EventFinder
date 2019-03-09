@@ -22,5 +22,7 @@ Route::post('place/radius', 'PlaceController@radius');
 
 Route::resource('event', 'EventController');
 Route::post('event/radius', 'EventController@radius');
+Route::post('place/{place}/event', 'EventController@store')->where('place', '[0-9]+');
 
 Route::resource('comment', 'CommentController');
+Route::post('event/{event}/comment', 'CommentController@store')->where('event', '[0-9]+');;

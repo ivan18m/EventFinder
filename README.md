@@ -69,11 +69,14 @@ php artisan db:seed
 
 * **URL:**
 
-    `/api/place/`
+    Place:
+    `/api/place`
 
-    `/api/event/`
+    Event:
+    `/api/place/{place}/event`
 
-    `/api/comment/`
+    Comment:
+    `/api/event/{event}/comment`
 
 * **Method:**
     `POST`

@@ -26,8 +26,10 @@ class EventController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $place)
     {
+        $request->request->add(['place' => $place]);
+
         $data = $request->validate([
             'name' => 'required|string|min:2|max:30',
             'place' => 'required|integer|exists:place,id',

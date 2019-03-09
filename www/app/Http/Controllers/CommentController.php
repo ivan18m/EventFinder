@@ -24,8 +24,10 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $event)
     {
+        $request->request->add(['event' => $event]);
+
         $data = $request->validate([
             'author' => 'required|string|min:2|max:30',
             'text' => 'required|string|max:255',
