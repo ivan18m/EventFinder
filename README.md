@@ -96,7 +96,6 @@ php artisan db:seed
     Event:
     ```
     name: string|required,
-    place: integer|required,
     duration: "HH:mm"|required,
     starts_at: "YYYY-MM-DD HH:mm"|required,
     description: string|nullable (OPTIONAL)
@@ -106,7 +105,6 @@ php artisan db:seed
     ```
     author: string|required,
     text: string|required
-    event: integer|required
     ```
 
 * **Success Response Example:**
