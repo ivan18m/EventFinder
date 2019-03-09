@@ -34,15 +34,6 @@ class CommentController extends Controller
             'event' => 'required|integer|exists:event,id',
         ]);
 
-        $exists = Event::find($request->event);
-
-        if($exists == NULL) {
-            return \Response::json([
-                'status' => 'error', 
-                'message' => "Event doesn't exist"
-            ], 400);
-        }
-
         $comment = new Comment;
         $comment->author = $request->author;
         $comment->text = $request->text;
